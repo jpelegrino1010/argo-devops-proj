@@ -1,0 +1,29 @@
+image:
+  repository: mysql
+  tag: "8.4.7"
+  pullPolicy: IfNotPresent
+
+mysql:
+  rootPassword: "admin"   # CAMBIAR en producción
+  database: "appdb"               # opcional
+  user: "appuser"                 # opcional
+  password: "admin"       # opcional (si usas user)
+
+service:
+  type: ClusterIP
+  port: 3306
+
+resources: {}
+  # limits:
+  #   cpu: "500m"
+  #   memory: "512Mi"
+  # requests:
+  #   cpu: "250m"
+  #   memory: "256Mi"
+
+persistence:
+  enabled: true
+  accessModes:
+    - ReadWriteOnce
+  size: 8Gi
+  storageClass: "hostpath"   # ejemplo: "premium-rwo" (en tu cluster)
